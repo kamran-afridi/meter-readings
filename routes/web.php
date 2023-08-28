@@ -32,13 +32,10 @@ Route::get('logout', [AuthController::class, 'logout'])->name('logout');
 
 /* only Auth user will access these routes */
 
-// Route::group(['middleware' => ['auth']], function () {
-Route::get('dashboard', [AuthController::class, 'dashboard']);
-Route::resource('meters', ActionController::class);
-Route::POST('meter', [ActionController::class, 'create'])->name('create.estimated.reading');
-Route::Get('view-est-reading/{id}', [ActionController::class, 'view_est_reading'])->name('meters.view_est_reading');
-Route::resource('meter-reading', ReadingActionController::class);
-// });
-// Route::get('/beta', function () {
-//     return view('beta');
-// });
+Route::group(['middleware' => ['auth']], function () {
+    Route::get('dashboard', [AuthController::class, 'dashboard']);
+    Route::resource('meters', ActionController::class);
+    Route::POST('meter', [ActionController::class, 'create'])->name('create.estimated.reading');
+    Route::Get('view-est-reading/{id}', [ActionController::class, 'view_est_reading'])->name('meters.view_est_reading');
+    Route::resource('meter-reading', ReadingActionController::class);
+});
